@@ -20,8 +20,8 @@
     <v-btn @click="logout">Log Out</v-btn>
   </v-container>
 </template>
-  
-  <script setup>
+
+<script setup>
 import { ref } from "vue";
 
 const valid = ref(false);
@@ -35,7 +35,7 @@ const rules = {
 
 const login = async () => {
   try {
-    const response = await fetch("your-api-endpoint/login", {
+    const response = await fetch("http://localhost:3001/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email.value, password: password.value }),

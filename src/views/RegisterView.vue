@@ -1,28 +1,58 @@
 <template>
-  <v-container>
-    <v-form ref="form" v-model="valid" @submit.prevent="register">
-      <v-text-field
-        v-model="name"
-        label="Name"
-        :rules="[rules.required]"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="email"
-        label="Email"
-        :rules="[rules.required, rules.email]"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="password"
-        label="Password"
-        :rules="[rules.required]"
-        type="password"
-        required
-      ></v-text-field>
-      <v-btn type="submit" :disabled="!valid">Sign Up</v-btn>
-      <v-alert v-if="error" type="error">{{ error }}</v-alert>
-    </v-form>
+  <v-container class="d-flex justify-center align-center" fluid>
+    <v-card class="mx-auto" elevation="8" width="400">
+      <v-card-title class="text-h5 text-center">Create an Account</v-card-title>
+      <v-divider></v-divider>
+
+      <v-form ref="form" class="px-4 py-4" v-model="valid" @submit.prevent="register">
+        <v-text-field
+          v-model="name"
+          label="Name"
+          :rules="[rules.required]"
+          required
+          prepend-icon="mdi-account"
+          clearable
+        ></v-text-field>
+
+        <v-text-field
+          v-model="email"
+          label="Email"
+          :rules="[rules.required, rules.email]"
+          required
+          prepend-icon="mdi-email"
+          clearable
+        ></v-text-field>
+
+        <v-text-field
+          v-model="password"
+          label="Password"
+          :rules="[rules.required]"
+          type="password"
+          required
+          prepend-icon="mdi-lock"
+          clearable
+        ></v-text-field>
+
+        <v-btn
+          type="submit"
+          :disabled="!valid"
+          color="primary"
+          class="mt-4"
+          elevation="2"
+          block
+        >
+          Sign Up
+        </v-btn>
+
+        <v-alert v-if="error" type="error" class="mt-3">{{ error }}</v-alert>
+      </v-form>
+
+      <v-divider></v-divider>
+      <v-card-text class="text-center mt-3">
+        Already have an account?
+        <v-btn text @click="navigateToLogin">Log In</v-btn>
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
   
@@ -41,7 +71,7 @@ const rules = {
 
 const register = async () => {
   try {
-    const response = await fetch("your-api-endpoint/register", {
+    const response = await fetch("http://localhost:3001/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

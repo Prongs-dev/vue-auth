@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-form ref="form" v-model="valid" @submit.prevent="verify">
-      <v-text-field
+      <v-otp-field
         v-model="pin"
         label="Enter Verification PIN"
         :rules="[rules.required, rules.pin]"
         required
-      ></v-text-field>
+      ></v-otp-field>
       <v-btn type="submit" :disabled="!valid">Verify</v-btn>
       <v-alert v-if="error" type="error">{{ error }}</v-alert>
     </v-form>
@@ -26,7 +26,7 @@ const rules = {
 
 const verify = async () => {
   try {
-    const response = await fetch("your-api-endpoint/verify", {
+    const response = await fetch("http://localhost:3001/api/auth/verify", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ pin: pin.value }),

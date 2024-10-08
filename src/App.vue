@@ -1,11 +1,16 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/login" class="mr-4">Login</router-link>
-      <router-link to="/register">Register</router-link>
-    </nav>
-    <router-view />
-  </div>
+  <v-app>
+    <v-toolbar color="indigo" dark>
+      <v-toolbar-items>
+        <v-btn text to="/login" class="mr-4">Login</v-btn>
+        <v-btn text to="/register">Register</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+
+    <v-container>
+      <router-view />
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -15,16 +20,5 @@ export default {
 </script>
 
 <style>
-/* Add some basic styles for the nav links */
-nav {
-  padding: 1rem;
-  background-color: #f8f9fa; /* Light background */
-}
-nav a {
-  text-decoration: none;
-  color: #007bff; /* Bootstrap primary color */
-}
-nav a:hover {
-  text-decoration: underline;
-}
+
 </style>

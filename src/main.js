@@ -1,17 +1,8 @@
+// src/main.js
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from './router';
-import { createVuetify } from 'vuetify';
-import 'vuetify/styles'; // Ensure you import Vuetify styles
-import '@mdi/font/css/materialdesignicons.css'; // Optional: Material Design Icons
-
-import * as components from 'vuetify/components';
-import * as directives from 'vuetify/directives';
-// Create a Vuetify instance
-const vuetify = createVuetify(
-    components,
-    directives,
-);
+import router from './router'; // Make sure you have router set up
+import vuetify from './plugins/vuetify'; // Import the Vuetify plugin
 
 const app = createApp(App);
 

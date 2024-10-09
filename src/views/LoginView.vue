@@ -1,23 +1,66 @@
 <template>
-  <v-container>
-    <v-form ref="form" v-model="valid" @submit.prevent="login">
-      <v-text-field
-        v-model="email"
-        label="Email"
-        :rules="[rules.required, rules.email]"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="password"
-        label="Password"
-        :rules="[rules.required]"
-        type="password"
-        required
-      ></v-text-field>
-      <v-btn type="submit" :disabled="!valid">Log In</v-btn>
-      <v-alert v-if="error" type="error">{{ error }}</v-alert>
-    </v-form>
-    <v-btn @click="logout">Log Out</v-btn>
+  <v-container class="d-flex align-center justify-center min-vh-400">
+    <v-card elevation="3" class="px-8 py-6" width="400">
+      <v-card-title class="justify-center">
+        <span class="text-h6 font-weight-medium">Login to Your Account</span>
+      </v-card-title>
+      <v-divider></v-divider>
+      <v-form
+        ref="form"
+        v-model="valid"
+        @submit.prevent="login"
+        lazy-validation
+      >
+        <v-card-text>
+          <v-text-field
+            v-model="email"
+            label="Email"
+            :rules="[rules.required, rules.email]"
+            required
+            outlined
+            solo
+            prepend-inner-icon="mdi-email"
+            class="mt-4"
+          ></v-text-field>
+          <v-text-field
+            v-model="password"
+            label="Password"
+            :rules="[rules.required]"
+            type="password"
+            required
+            outlined
+            solo
+            prepend-inner-icon="mdi-lock"
+            class="mt-4 mb-6"
+          ></v-text-field>
+          <v-btn
+            type="submit"
+            :disabled="!valid"
+            color="primary"
+            block
+            large
+            rounded
+          >
+            Log In
+          </v-btn>
+          <v-alert
+            v-if="error"
+            type="error"
+            border="left"
+            elevation="2"
+            color="red lighten-3"
+            dark
+            dense
+            class="mt-4"
+          >
+            {{ error }}
+          </v-alert>
+        </v-card-text>
+      </v-form>
+      <v-card-actions class="d-flex justify-center">
+        <v-btn @click="logout" color="secondary" text>Log Out</v-btn>
+      </v-card-actions>
+    </v-card>
   </v-container>
 </template>
 

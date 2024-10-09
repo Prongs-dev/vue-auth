@@ -1,19 +1,57 @@
 <template>
-  <v-container>
-    <v-form ref="form" v-model="valid" @submit.prevent="verify">
-      <v-otp-field
-        v-model="pin"
-        label="Enter Verification PIN"
-        :rules="[rules.required, rules.pin]"
-        required
-      ></v-otp-field>
-      <v-btn type="submit" :disabled="!valid">Verify</v-btn>
-      <v-alert v-if="error" type="error">{{ error }}</v-alert>
-    </v-form>
+  <v-container class="d-flex align-center justify-center min-vh-100">
+    <v-card elevation="3" class="px-8 py-6">
+      <v-card-title class="justify-center">
+        <span class="text-h6 font-weight-medium">Verify Your Account</span>
+      </v-card-title>
+      <v-divider></v-divider>
+      <v-form
+        ref="form"
+        v-model="valid"
+        @submit.prevent="verify"
+        lazy-validation
+      >
+        <v-card-text>
+          <v-otp-input
+            v-model="pin"
+            :length="6"
+            :input-class="'v-text-field'"
+            label="Enter Verification PIN"
+            :rules="[rules.required, rules.pin]"
+            required
+            outlined
+            solo
+            hide-details
+            class="mt-4 mb-6"
+          />
+          <v-btn
+            type="submit"
+            :disabled="!valid"
+            color="primary"
+            block
+            large
+            rounded
+          >
+            Verify
+          </v-btn>
+          <v-alert
+            v-if="error"
+            type="error"
+            border="left"
+            elevation="2"
+            color="red lighten-3"
+            dark
+            dense
+            class="mt-4"
+          >
+            {{ error }}
+          </v-alert>
+        </v-card-text>
+      </v-form>
+    </v-card>
   </v-container>
 </template>
-  
-  <script setup>
+<script setup>
 import { ref } from "vue";
 
 const valid = ref(false);
